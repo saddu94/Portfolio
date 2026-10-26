@@ -83,7 +83,7 @@
     .btn-row { display: flex; gap: 1rem; align-items: center; }
     .btn-pri { background: transparent; border: 1px solid var(--green); color: var(--green); padding: 8px 20px; font-family: inherit; font-size: 0.8rem; cursor: pointer; text-decoration: none; transition: all 0.2s; }
     .btn-pri:hover { background: var(--green); color: #000; }
-    .btn-ghost { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+    .btn-ghost, .btn-ghost:visited { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
     .btn-ghost::before { content: '[ '; } .btn-ghost::after { content: ' ]'; } .btn-ghost:hover { color: var(--green); }
 
     .hero-right { position: relative; display: flex; align-items: center; justify-content: center; z-index: 2; }
@@ -140,6 +140,8 @@
     .c-bar span { color: var(--muted); }
     .c-body { padding: 1rem; line-height: 2.1; }
     .c-body .ci { color: var(--text); }
+    .social-link { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .social-link:hover { color: var(--green); }
     .c-body .pr { color: var(--green); }
     .c-sep { border-top: 1px solid var(--border); margin: 0 1rem; }
     .c-cta { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
@@ -154,6 +156,19 @@
     .f-icons a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .f-icons a:hover { color: var(--green); }
 
+    body.three-cursor-active,
+    body.three-cursor-active * { cursor: none !important; }
+    body.three-cursor-active input,
+    body.three-cursor-active textarea,
+    body.three-cursor-active [contenteditable="true"] { cursor: text !important; }
+    #three-cursor {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 200; opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+    @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+      #three-cursor { display: none; }
+    }
     @media(max-width:900px){
       #home{grid-template-columns:1fr;} .hero-right{display:none;}
       .split{grid-template-columns:1fr;} .split>div:first-child{border-right:none;border-bottom:1px solid var(--border);}
@@ -192,7 +207,7 @@
     <p class="hero-desc">Passionate about digital security, technology,<br>and creative problem-solving. Exploring the world<br>one secure connection at a time.</p>
     <div class="btn-row">
       <a href="#projects" class="btn-pri">&gt; view projects</a>
-      <a href="#" class="btn-ghost">download resume</a>
+      <a href="Resume.pdf" download>download resume</a>
     </div>
   </div>
   <div class="hero-right">
@@ -292,40 +307,53 @@
   <div class="proj-grid">
     <div class="proj-card">
       <div class="proj-thumb">
-        <div class="proj-code">&gt; SecureChat.init()<br>&gt; Encrypting channels...<br>[&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;] 82%<br>&gt; Socket connected<br>&gt; Handshake OK</div>
+        <div class="proj-code">&gt; repository.open()<br>&gt; Password Checker<br>&gt; Cybersecurity project<br>&gt; Source code available</div>
         <div class="proj-overlay"></div>
       </div>
       <div class="proj-body">
-        <div class="proj-title">SecureChat</div>
-        <p class="proj-desc">End-to-end encrypted chat application with real-time messaging.</p>
-        <div class="proj-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Socket.io</span></div>
-        <a href="#" class="proj-link">view project</a>
+        <div class="proj-title">Password Checker</div>
+        <p class="proj-desc">A Python tool that evaluates password strength based on length, uppercase/lowercase letters, digits, and special characters.</p>
+        <div class="proj-tags"><span class="tag">Featured</span><span class="tag">Cybersecurity</span></div>
+        <a href="https://github.com/saddu94/PRODIGY_CS_03" class="proj-link" target="_blank" rel="noopener noreferrer">view on GitHub</a>
       </div>
       <span class="proj-corner">↗</span>
     </div>
     <div class="proj-card">
       <div class="proj-thumb">
-        <div class="proj-code">&gt; DevDash.load()<br>&gt; Fetching repos...<br>[&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;] 92%<br>&gt; Charts rendered<br>&gt; Dashboard ready</div>
+        <div class="proj-code">&gt; pixel_manipulator.init()<br>&gt; Loading pixel data...<br>&gt; Image manipulation ready<br>&gt; Source code available</div>
         <div class="proj-overlay"></div>
       </div>
       <div class="proj-body">
-        <div class="proj-title">DevDash</div>
-        <p class="proj-desc">A developer dashboard to track GitHub stats, projects and learning progress.</p>
-        <div class="proj-tags"><span class="tag">React</span><span class="tag">Tailwind</span><span class="tag">GitHub API</span></div>
-        <a href="#" class="proj-link">view project</a>
+        <div class="proj-title">Pixel-Manipulator</div>
+        <p class="proj-desc">A Python tool to encrypt, save, and decrypt images using a key.</p>
+        <div class="proj-tags"><span class="tag">Pixel Manipulation</span><span class="tag">GitHub</span></div>
+        <a href="https://github.com/saddu94/Pixel-Manipulator" class="proj-link" target="_blank" rel="noopener noreferrer">view on GitHub</a>
       </div>
       <span class="proj-corner">↗</span>
     </div>
     <div class="proj-card">
-      <div class="proj-thumb" style="background:#1a0000;">
-        <div class="proj-code" style="color:#ff5555;">&gt; VulnScan.run()<br>&gt; Scanning ports...<br>!! THREAT DETECTED<br>&gt; CVE-2024-1234<br>&gt; Generating report</div>
-        <div class="proj-overlay" style="background:linear-gradient(180deg,transparent 40%,rgba(10,0,0,0.85));"></div>
+      <div class="proj-thumb">
+        <div class="proj-code">&gt; caesar_cipher.init()<br>&gt; Shifting letters...<br>&gt; Encrypt / decrypt<br>&gt; Key: shift value</div>
+        <div class="proj-overlay"></div>
       </div>
       <div class="proj-body">
-        <div class="proj-title">VulnScan</div>
-        <p class="proj-desc">A web vulnerability scanner for common security risks.</p>
-        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Kali Linux</span></div>
-        <a href="#" class="proj-link">view project</a>
+        <div class="proj-title">Caesar Cipher</div>
+        <p class="proj-desc">A Python tool for encrypting and decrypting text using the Caesar cipher.</p>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Cryptography</span></div>
+        <a href="https://github.com/saddu94/Caesar" class="proj-link" target="_blank" rel="noopener noreferrer">view on GitHub</a>
+      </div>
+      <span class="proj-corner">↗</span>
+    </div>
+    <div class="proj-card">
+      <div class="proj-thumb">
+        <div class="proj-code">&gt; keylogger.init()<br>&gt; Recording keystrokes<br>&gt; Saving to text file<br>&gt; Repository ready</div>
+        <div class="proj-overlay"></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Keylogger Development</div>
+        <p class="proj-desc">A Python keylogger that records system keystrokes to a text file.</p>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Cybersecurity</span></div>
+        <a href="https://github.com/saddu94/Keylogger-Development" class="proj-link" target="_blank" rel="noopener noreferrer">view on GitHub</a>
       </div>
       <span class="proj-corner">↗</span>
     </div>
@@ -338,7 +366,7 @@
     <div class="c-body">
       <div><span class="pr">&#9993;</span> &nbsp;<span class="ci">saddamofficial123@gmail.com</span></div>
       <div><span class="pr">&#128222;</span> &nbsp;<span class="ci">+91 9746830585</span></div>
-      <div><span class="pr">&#128279;</span> &nbsp;<span class="ci">LinkedIn / GitHub / Instagram</span></div>
+      <div><span class="pr">&#128279;</span> &nbsp;<a class="social-link" href="https://www.linkedin.com/in/saddam-hussain-164647406" target="_blank" rel="noopener noreferrer">LinkedIn</a> / <a class="social-link" href="https://github.com/saddu94" target="_blank" rel="noopener noreferrer">GitHub</a> / <a class="social-link" href="https://www.instagram.com/saddam_rockzz/" target="_blank" rel="noopener noreferrer">Instagram</a></div>
     </div>
     <div class="c-sep"></div>
     <div class="c-body"><div style="color:var(--muted)">&gt;_ send a message... <span class="blink">|</span></div></div>
@@ -355,7 +383,7 @@
 </div>
 
 <footer>
-  <span>&copy; 2025 Saddam. All rights reserved.</span>
+  <span>&copy; 2026 Saddam. All rights reserved.</span>
   <div class="f-icons">
     <a href="https://github.com/saddu94" target="_blank" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
     <a href="https://www.linkedin.com/in/saddam-hussain-164647406" target="_blank" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
@@ -377,6 +405,150 @@
       a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--green)' : '';
     });
   });
+</script>
+<script>
+  (() => {
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!finePointer || reduceMotion) return;
+
+    const threeScript = document.createElement('script');
+    threeScript.src = 'https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js';
+    threeScript.async = true;
+    threeScript.onload = initCursor;
+    document.head.appendChild(threeScript);
+
+    function initCursor() {
+      if (!window.THREE || !THREE.WebGLRenderer) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'three-cursor';
+      canvas.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(canvas);
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
+      } catch (error) {
+        canvas.remove();
+        return;
+      }
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(
+        -window.innerWidth / 2, window.innerWidth / 2,
+        window.innerHeight / 2, -window.innerHeight / 2,
+        0.1, 100
+      );
+      camera.position.z = 40;
+
+      const cursor = new THREE.Group();
+      scene.add(cursor);
+
+      const arrowShape = new THREE.Shape();
+      arrowShape.moveTo(0, 0);
+      arrowShape.lineTo(0, -24);
+      arrowShape.lineTo(6, -18);
+      arrowShape.lineTo(12, -30);
+      arrowShape.lineTo(16, -28);
+      arrowShape.lineTo(10, -16);
+      arrowShape.lineTo(19, -16);
+      arrowShape.closePath();
+      const arrowGeometry = new THREE.ShapeGeometry(arrowShape);
+
+      const glow = new THREE.Mesh(
+        arrowGeometry,
+        new THREE.MeshBasicMaterial({ color: 0x00ff41, side: THREE.DoubleSide, transparent: true, opacity: 0.16, depthTest: false })
+      );
+      glow.scale.setScalar(1.22);
+      glow.position.z = -0.4;
+
+      const fill = new THREE.Mesh(
+        arrowGeometry,
+        new THREE.MeshBasicMaterial({ color: 0x03140a, side: THREE.DoubleSide, transparent: true, opacity: 0.96, depthTest: false })
+      );
+      fill.position.z = 0;
+
+      const outline = new THREE.LineSegments(
+        new THREE.EdgesGeometry(arrowGeometry),
+        new THREE.LineBasicMaterial({ color: 0x00ff41, transparent: true, opacity: 0.95, depthTest: false })
+      );
+      outline.position.z = 0.5;
+      cursor.add(glow, fill, outline);
+
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let targetScale = 1;
+      let visible = false;
+      let animating = false;
+      let animationFrame = 0;
+
+      function animate() {
+        if (!visible) {
+          animating = false;
+          return;
+        }
+        animationFrame = requestAnimationFrame(animate);
+        currentX += (targetX - currentX) * 0.2;
+        currentY += (targetY - currentY) * 0.2;
+        cursor.position.set(currentX, currentY, 0);
+        const scale = cursor.scale.x + (targetScale - cursor.scale.x) * 0.16;
+        cursor.scale.setScalar(scale);
+        renderer.render(scene, camera);
+      }
+
+      function startAnimation() {
+        if (animating) return;
+        animating = true;
+        animate();
+      }
+
+      function hideCursor() {
+        visible = false;
+        animating = false;
+        canvas.style.opacity = '0';
+        document.body.classList.remove('three-cursor-active');
+        cancelAnimationFrame(animationFrame);
+      }
+
+      document.addEventListener('pointermove', (event) => {
+        const element = event.target instanceof Element ? event.target : null;
+        if (element && element.closest('input, textarea, [contenteditable="true"]')) {
+          hideCursor();
+          return;
+        }
+
+        const interactive = element && element.closest('a, button, [role="button"]');
+        targetX = event.clientX - window.innerWidth / 2;
+        targetY = window.innerHeight / 2 - event.clientY;
+        targetScale = interactive ? 1.14 : 1;
+        const tint = interactive ? 0x9dffb2 : 0x00ff41;
+        glow.material.color.setHex(tint);
+        outline.material.color.setHex(tint);
+        document.body.classList.add('three-cursor-active');
+        canvas.style.opacity = '0.92';
+        visible = true;
+        startAnimation();
+      }, { passive: true });
+
+      document.addEventListener('pointerleave', hideCursor);
+      window.addEventListener('blur', hideCursor);
+      window.addEventListener('resize', () => {
+        camera.left = -window.innerWidth / 2;
+        camera.right = window.innerWidth / 2;
+        camera.top = window.innerHeight / 2;
+        camera.bottom = -window.innerHeight / 2;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
